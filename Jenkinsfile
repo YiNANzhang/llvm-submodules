@@ -9,7 +9,7 @@ node {
 
     dir('build') {
       stage 'Configure'
-      sh 'cmake -G Ninja -DCMAKE_CXX_COMPILER=clang++37 -DCMAKE_C_COMPILER=clang37 -C ../cmake-caches/$BRANCH_NAME.cmake -DLLVM_EXTERNAL_CLANG_SOURCE_DIR=../clang -DLLVM_EXTERNAL_LLD_SOURCE_DIR=../lld -DLLVM_EXTERNAL_CLANG_TOOLS_EXTRA_SOURCE_DIR=../clang-tools-extra -DLLVM_EXTERNAL_COMPILER_RT_SOURCE_DIR=../compiler-rt ../llvm'
+      sh 'cmake -G Ninja -DCMAKE_CXX_COMPILER=clang++37 -DCMAKE_C_COMPILER=clang37 -C ../cmake-caches/FreeBSD-RA-x86_64.cmake -DLLVM_EXTERNAL_CLANG_SOURCE_DIR=../clang -DLLVM_EXTERNAL_LLD_SOURCE_DIR=../lld -DLLVM_EXTERNAL_CLANG_TOOLS_EXTRA_SOURCE_DIR=../clang-tools-extra -DLLVM_EXTERNAL_COMPILER_RT_SOURCE_DIR=../compiler-rt ../llvm'
 
       stage 'Build'
       sh 'ninja'
@@ -30,7 +30,7 @@ node {
 
     stage 'Push'
     if(currentBuild.result == null) {
-      sh 'git push origin HEAD:$BRANCH_NAME'
+      sh 'git push origin HEAD:FreeBSD-RA-x86_64'
     } else {
       echo 'Skipping push due to failures.'
     }
