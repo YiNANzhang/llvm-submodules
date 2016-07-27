@@ -30,7 +30,7 @@ node {
 
   stage 'Push'
   if(currentBuild.result == null) {
-    sh 'git push origin'
+    sh 'git push origin HEAD:$BRANCH_NAME'
   } else {
     echo 'Skipping push due to failures.'
   }
