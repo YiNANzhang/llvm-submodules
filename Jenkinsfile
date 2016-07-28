@@ -1,3 +1,4 @@
 node {
-  load 'Bots/${JOB_NAME}.groovy'
+  def jobScript = 'Bots/' + env.JOB_NAME + '.groovy'
+  load jobScript
 }()
