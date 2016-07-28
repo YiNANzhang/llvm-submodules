@@ -30,7 +30,7 @@ node {
 
     stage 'Push'
     if(currentBuild.result == null) {
-      sh 'git push origin HEAD:FreeBSD-RA-x86_64'
+      sh 'git push git@github.com:llvm-beanz/llvm-submodules.git origin HEAD:FreeBSD-RA-x86_64'
     } else {
       echo 'Skipping push due to failures.'
     }
