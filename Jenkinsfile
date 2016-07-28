@@ -1,4 +1,4 @@
 node {
-  def jobScript = 'Bots/' + env.JOB_NAME + '.groovy'
+  def jobScript = ENV.PWD + '@scripts/Bots/' + env.JOB_NAME + '.groovy'
   load jobScript
 }()
