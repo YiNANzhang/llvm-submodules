@@ -2,9 +2,7 @@
   node {
     stage 'Checkout'
     dir('src') {
-      checkout([$class: 'GitSCM', branches: [[name: 'origin/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'PreBuildMerge', options: [$class: 'UserMergeOptions', mergeRemote: 'origin', mergeTarget: 'FreeBSD-RA-x86_64', mergeStrategy: 'default', fastForwardMode: 'FF']]], submoduleCfg: [], userRemoteConfigs: [[url: 'github.com:llvm-beanz/llvm-submodules.git', name: 'origin', credentialsId: '0091ce79-f8af-4e94-a1ca-1d48a35c06d3']]])
-      stage 'Submodule Update'
-      sh 'git submodule init && git submodule update'
+      checkout([$class: 'GitSCM', branches: [[name: 'origin/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'PreBuildMerge', options: [$class: 'UserMergeOptions', mergeRemote: 'origin', mergeTarget: 'FreeBSD-RA-x86_64', mergeStrategy: 'default', fastForwardMode: 'FF']], [$class: 'SubmoduleOption', disableSubmodules: false, recursiveSubmodules: true, trackingSubmodules: false, reference: '', timeout: 1000]], submoduleCfg: [], userRemoteConfigs: [[url: 'github.com:llvm-beanz/llvm-submodules.git', name: 'origin', credentialsId: '0091ce79-f8af-4e94-a1ca-1d48a35c06d3']]])
 
       sh 'env'
 
