@@ -11,7 +11,7 @@
         sh 'cmake -G Ninja -DCMAKE_CXX_COMPILER=clang++37 -DCMAKE_C_COMPILER=clang37 -C ../cmake-caches/FreeBSD-RA-x86_64.cmake -DLLVM_EXTERNAL_CLANG_SOURCE_DIR=../clang -DLLVM_EXTERNAL_LLD_SOURCE_DIR=../lld -DLLVM_EXTERNAL_CLANG_TOOLS_EXTRA_SOURCE_DIR=../clang-tools-extra -DLLVM_EXTERNAL_COMPILER_RT_SOURCE_DIR=../compiler-rt ../llvm'
 
         stage 'Build'
-        sh 'ninja'
+        sh 'ninja -j3'
 
         stage 'check-llvm'
         sh 'ninja check-llvm || true'
