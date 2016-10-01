@@ -59,8 +59,10 @@ while len(new_commits) > 0:
     temp.close()
 
     subprocess.check_call(['git', 'add', oldest_commit_module])
+    print ['git', 'add', oldest_commit_module]
     subprocess.check_call(['git', 'commit', '--author=%s' % commit_author, '--file=%s' % temp.name])
     os.unlink(temp.name)
+    new_commits[oldest_commit_module].pop(0)
 
   # remove empty entries
   for submodule in to_remove:
