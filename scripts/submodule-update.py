@@ -36,7 +36,7 @@ while len(new_commits) > 0:
   oldest_commit_module = None
   for submodule in new_commits:
     if len(new_commits[submodule]) == 0:
-      to_remove.extend(submodule)
+      to_remove.append(submodule)
       continue
     if oldest_commit is None:
       oldest_commit = new_commits[submodule][0]
