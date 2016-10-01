@@ -49,17 +49,18 @@ while len(new_commits) > 0:
         oldest_commit = commit
         oldest_commit_time = commit_time
         oldest_commit_module = submodule
-  git_dir_flag = '--git-dir=%s/%s/.git' % (os.getcwd(), oldest_commit_module)
-  subprocess.check_call(['git', git_dir_flag, 'checkout', oldest_commit])
-  commit_message = subprocess.check_output(['git', git_dir_flag, 'log', '-n', '1', '--pretty=%B', oldest_commit])
-  commit_author = subprocess.check_output(['git', git_dir_flag, 'log', '-n', '1', '--pretty=%an <%ae>', oldest_commit]).strip()
-  temp = tempfile.NamedTemporaryFile(delete=False)
-  temp.write(commit_message)
-  temp.close()
+  if oldest_commit:
+    git_dir_flag = '--git-dir=%s/%s/.git' % (os.getcwd(), oldest_commit_module)
+    subprocess.check_call(['git', git_dir_flag, 'checkout', oldest_commit])
+    commit_message = subprocess.check_output(['git', git_dir_flag, 'log', '-n', '1', '--pretty=%B', oldest_commit])
+    commit_author = subprocess.check_output(['git', git_dir_flag, 'log', '-n', '1', '--pretty=%an <%ae>', oldest_commit]).strip()
+    temp = tempfile.NamedTemporaryFile(delete=False)
+    temp.write(commit_message)
+    temp.close()
 
-  subprocess.check_call(['git', 'add', oldest_commit_module])
-  subprocess.check_call(['git', 'commit', '--author=%s' % commit_author, '--file=%s' % temp.name])
-  os.unlink(temp.name)
+    subprocess.check_call(['git', 'add', oldest_commit_module])
+    subprocess.check_call(['git', 'commit', '--author=%s' % commit_author, '--file=%s' % temp.name])
+    os.unlink(temp.name)
 
   # remove empty entries
   for submodule in to_remove:
