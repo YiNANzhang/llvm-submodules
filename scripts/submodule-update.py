@@ -18,7 +18,7 @@ def getSubmoduleStatus():
 def getCommitsSinceUpdate(submodule, last_hash):
   subprocess.check_call(['git', '--git-dir=%s/%s/.git' % (os.getcwd(), submodule), 'fetch', 'origin', 'master'])
   hashes = subprocess.check_output(['git', '--git-dir=%s/%s/.git' % (os.getcwd(), submodule), 'log', '--pretty=%H', '%s..origin/master' % last_hash])
-  return hashes.split("\n")
+  return hashes.split("\n")[:-1]
 
 def getTimeOfCommit(submodle, commit_hash):
   timestamp = subprocess.check_output(['git', '--git-dir=%s/%s/.git' % (os.getcwd(), submodule), 'log', '--pretty=%cI', commit_hash])
