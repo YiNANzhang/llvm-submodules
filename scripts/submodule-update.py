@@ -61,8 +61,6 @@ while len(new_commits) > 0:
   subprocess.check_call(['git', 'commit', '--author=%s' % commit_author, '--file=%s' % temp.name])
   os.unlink(temp.name)
 
-  exit()
-
   # remove empty entries
   for submodule in to_remove:
     new_commits.pop(submodule, None)
