@@ -12,6 +12,8 @@ def getSubmoduleStatus():
     line_parts = line.split(" ")
     if len(line_parts) > 2:
       commit_hash = line_parts[1]
+      if commit_hash[0] == '-':
+        commit_hash = commit_hash[1:]
       module = line_parts[2]
       module_status[module] = commit_hash
   return module_status
