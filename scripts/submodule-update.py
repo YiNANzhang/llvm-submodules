@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# git rev-list --max-parents=0 HEAD -> finds root commit
 
 import os
 import subprocess
@@ -9,7 +10,7 @@ def getSubmoduleStatus():
   module_status = {}
   for line in output.split("\n"):
     line_parts = line.split(" ")
-    if len(line_parts) > 1:
+    if len(line_parts) > 2:
       commit_hash = line_parts[1]
       module = line_parts[2]
       module_status[module] = commit_hash
