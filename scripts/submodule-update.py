@@ -9,14 +9,12 @@ def getSubmoduleStatus():
   output = subprocess.check_output(['git', 'submodule', 'status'])
   module_status = {}
   for line in output.split("\n"):
-    line_parts = line.split(" ")
-    if len(line_parts) == 2:
-      commit_hash = line_parts[0][1:]
+    line_parts = line.strip().split(" ")
+    if len(line_parts) > 1:
+      commit_hash = line_parts[0]
+      if commit_hash[0] == "-":
+        commit_hash = commit_hash[1:]
       module = line_parts[1]
-      module_status[module] = commit_hash
-    elif len(line_parts) == 3:
-      commit_hash = line_parts[1]
-      module = line_parts[2]
       module_status[module] = commit_hash
   return module_status
 
